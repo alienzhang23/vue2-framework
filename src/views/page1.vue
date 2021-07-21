@@ -1,3 +1,17 @@
 <template>
-    <div>11111</div>
+    <div>
+        111
+    </div>
 </template>
+<script>
+ 
+ export default {
+     
+     data() {
+         return{
+
+         }
+     },
+ }
+ </script>
+ 

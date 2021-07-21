@@ -1,21 +1,1043 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <form-table :data="data">
+      <colgroup>
+        <col span="1" style="width: 200px" />
+        <col span="1" style="width: 400px" />
+        <col span="3" style="max-width: 251px" />
+        <col span="3" style="max-width: 223px" />
+      </colgroup>
+    </form-table>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import FormTable from "@/components/form-table";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
+    FormTable,
   },
-  mounted(){
-    console.log(process.env)
-  }
-}
+  data() {
+    return {
+      data: [
+        [{ type: "the_th", label: "一、申报企业基本情况", colspan: 7 }],
+        [
+          { type: "the_th", label: "企业名称", isRequire: true },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            key: "company_name",
+            value_type: "selectSearch",
+            selectOption: [],
+          },
+        ],
+        [
+          { type: "the_th", label: "统一社会信用社代码", isRequire: true },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            key: "unicode",
+            value_type: "input",
+          },
+          {
+            type: "the_th",
+            label: "所属行业（国民经济行业分类）",
+            isRequire: true,
+          },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            key: "industry",
+            value_type: "input",
+          },
+        ],
+        [
+          { type: "the_th", label: "通讯地址" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            key: "address",
+            value_type: "input",
+          },
+        ],
+        [
+          { type: "the_th", label: "所属区县（市）", isRequire: true },
+          {
+            type: "the_td",
+            value: "",
+            colspan: 2,
+            key: "address_area",
+            value_type: "input",
+          },
+          { type: "the_th", label: "所属乡镇街道", isRequire: true },
+          {
+            type: "the_td",
+            value: "",
+            colspan: 3,
+            key: "address_street",
+            value_type: "input",
+          },
+        ],
+        [
+          { type: "the_th", label: "法定代表人" },
+          {
+            type: "the_td",
+            value: "",
+            colspan: 2,
+            key: "legal_representative",
+            value_type: "input",
+          },
+          { type: "the_th", label: "手机" },
+          {
+            type: "the_td",
+            value: "",
+            colspan: 3,
+            key: "telphone",
+            value_type: "inputNumber",
+          },
+        ],
+        [
+          { type: "the_th", label: "联系人" },
+          {
+            type: "the_td",
+            value: "",
+            key: "project_head",
+            value_type: "input",
+          },
+          { type: "the_th", label: "联系手机" },
+          {
+            type: "the_td",
+            value: "",
+            key: "phone",
+            value_type: "inputNumber",
+          },
+          { type: "the_th", label: "邮箱" },
+          {
+            type: "the_td",
+            value: "",
+            key: "email",
+            value_type: "input",
+            colspan: 2,
+          },
+        ],
+        [{ type: "the_th", label: "二、申报新产品主要情况", colspan: 7 }],
+        [
+          { type: "the_th", label: "产品名称以及规格型号", isRequire: true },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            key: "product_name_label",
+            value_type: "input",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            colspan: 1,
+            label: "产品试产计划项目编号",
+            isRequire: true,
+          },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "input",
+            key: "project_id",
+          },
+          { type: "the_th", colspan: 1, label: "投产时间" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "date",
+            date_type: "month",
+            key: "production_date",
+          },
+        ],
+
+        [
+          { type: "the_th", colspan: 1, label: "该产品鉴定级别性质" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "input",
+            key: "product_level",
+          },
+          { type: "the_th", colspan: 1, label: "投产鉴定时间" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "date",
+            key: "identify_date",
+          },
+        ],
+        [
+          { type: "the_th", rowspan: 2, label: "该产品鉴定结论" },
+          { type: "the_th", colspan: 1, label: "技术性能" },
+          {
+            type: "the_td",
+            colspan: 5,
+            value: "",
+            value_type: "radio",
+            key: "technical_performance",
+            options: [
+              { label: "国际领先" },
+              { label: "国际先进" },
+              { label: "国内领先" },
+              { label: "国内先进" },
+            ],
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "创新点" },
+          {
+            type: "the_td",
+            colspan: 5,
+            value: "",
+            value_type: "textarea",
+            key: "innovation",
+          },
+        ],
+        [
+          { type: "the_th", label: "该产品技术来源" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            value_type: "radio",
+            key: "technology_sources",
+            options: [
+              { label: "企业自主开发" },
+              { label: "产学研联合开发" },
+              { label: "科技成果转化" },
+              { label: "化吸收再创新" },
+              { label: "引进国外设备、技术生产" },
+            ],
+          },
+        ],
+        [
+          { type: "the_th", label: "该产品是否列入重点研发项目" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            value_type: "radio",
+            key: "is_key_project",
+            options: [
+              { label: "国家重大项目" },
+              { label: "省重点项目" },
+              { label: "市重点项目" },
+              { label: "无" },
+            ],
+          },
+        ],
+        [
+          { type: "the_th", label: "该产品研发实际投入资金(万元)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "rd_investment",
+          },
+          { type: "the_th", label: "该产品国产化率(%（按价格计算）)" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "inputNumber",
+            key: "local_rate",
+          },
+        ],
+        [
+          { type: "the_th", rowspan: 3, label: "与该产品相关知识产权情况" },
+          { type: "the_th", colspan: 1, label: "已获有效专利(项)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "has_valid_patent",
+          },
+          { type: "the_th", label: "其中发明专利(项)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "has_invention_patent",
+          },
+        ],
+        [
+          { type: "the_th", label: "正在申报专利(项)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "patent_application",
+          },
+          { type: "the_th", label: "其中发明专利(项)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "other_patent_application",
+          },
+        ],
+        [
+          { type: "the_th", label: "已获软件著作权(项)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "software_copyright",
+          },
+          { type: "the_th", label: "已获其他知识产权(项)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "other_software_copyright",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            colspan: 1,
+            rowspan: 5,
+            label: "该产品经济效益",
+          },
+          {
+            type: "the_th",
+            colspan: 1,
+            label: "年份",
+          },
+          { type: "the_th", colspan: 1, label: "销售额（万元）" },
+          { type: "the_th", colspan: 1, label: "占企业销售比例（%）" },
+          { type: "the_th", colspan: 1, label: "销售数量（台套）" },
+          { type: "the_th", colspan: 1, label: "毛利润率（%）" },
+          { type: "the_th", colspan: 1, label: "出口额（万元）" },
+        ],
+
+        [
+          { type: "the_th", label: "2019年" },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_volume_2019",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_ratio_2019",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_num_2019",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "gross_profit_2019",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "export_volume_2019",
+          },
+        ],
+        [
+          { type: "the_th", label: "2020年" },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_volume_2020",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_ratio_2020",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_num_2020",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "gross_profit_2020",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "export_volume_2020",
+          },
+        ],
+        [
+          { type: "the_th", label: "2021年(预期)" },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_volume_2021",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_ratio_2021",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "sales_num_2021",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "gross_profit_2021",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "export_volume_2021",
+          },
+        ],
+        [
+          { type: "the_th", label: "产品成熟期年份" },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "product_maturity_date",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "product_maturity_sales_volume",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "product_maturity_sales_radio",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "product_maturity_sales_num",
+          },
+          {
+            type: "the_td",
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入",
+            key: "product_maturity_sales_profit",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            rowspan: 3,
+            label: "该产品突破关键核心技术（卡脖子技术）或实现进口替代情况",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            value_type: "textarea",
+            placeholder:
+              "简述该产品突破关键核心技术（卡脖子技术）或实现进口替代情况（300字以内，此项请另附页）",
+            key: "core_technology",
+          },
+        ],
+        [
+          { type: "the_th", label: "该关键核心技术及对标企业名称" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            value_type: "textarea",
+            placeholder: "请输入",
+            key: "core_technology_company",
+          },
+        ],
+        [
+          { type: "the_th", label: "主要替代进口产品生产企业名称" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: "",
+            value_type: "textarea",
+            placeholder: "请输入",
+            key: "core_technology_replace_company",
+          },
+        ],
+        [
+          { type: "the_th", rowspan: 5, label: "产品详细情况介绍" },
+          {
+            type: "the_th",
+            label:
+              "产品基本情况（包括该产品功能用途、应用领域及其在产业链中的地位、作用等，并附产品全貌图样）",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "base_info_oss",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            label:
+              "产品创新情况（重点介绍该产品的创新点及该产品知识产权积累和运用情况）",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "innovation_oss",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            label:
+              "产品技术性能（介绍该产品与原产品、国内外同类产品比较，技术性能突破提高等情况）",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "technical_performance_oss",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            label:
+              "产品制造技术工艺（介绍该产品制造技术及工艺的创新提高情况，特别是关键核心技术（或卡脖子技术）突破等情况）",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "manufacturing_technology_oss",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            label:
+              "该产品市场竞争力及发展前景（包括该产品在哪些功能、性能方面替代了哪些国外企业产品，替代规模、情况如何；研发生产中，该产品核心器件、关键材料进口应用情况）。",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "compet_development_oss",
+          },
+        ],
+        [{ type: "the_th", colspan: 7, label: "三、企业相关情况" }],
+        [
+          { type: "the_th", colspan: 1, label: "企业研发机构等级" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            key: "organization_level",
+            value_type: "radio",
+            options: [
+              { label: "国家级" },
+              { label: "省级" },
+              { label: "市级" },
+              { label: "其他" },
+            ],
+          },
+          { type: "the_th", colspan: 2, label: "其中企业（工程）技术中心等级" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            key: "technical_center_level",
+            value_type: "radio",
+            options: [
+              { label: "国家级" },
+              { label: "省级" },
+              { label: "市级" },
+              { label: "其他" },
+            ],
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "研发机构数量(个)" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            key: "organization_num",
+          },
+          { type: "the_th", colspan: 2, label: "其中海外研发机构(个)" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "inputNumber",
+            key: "overseas_organization_num",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            colspan: 1,
+            rowspan: 2,
+            label: "企业研发人员总数量(个)",
+          },
+          {
+            type: "the_td",
+            colspan: 1,
+            rowspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "rd_number",
+            label: "企业研发人员占比(%)",
+          },
+          {
+            type: "the_td",
+            colspan: 2,
+            rowspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            key: "rd_proportion",
+          },
+          { type: "the_th", colspan: 1, label: "其中副高以上研发人员数量(个)" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "inputNumber",
+            key: "senior_rd_num",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "其中博士以上研发人员数量(个)" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "inputNumber",
+            key: "doctor_rd_num",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "企业知识产权总数量(个)" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            key: "intellectual_property_num",
+          },
+          { type: "the_th", colspan: 2, label: "其中核心知识产权数量(个)" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "inputNumber",
+            key: "key_intellectual_property_num",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "企业有效专利数量(个)" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            key: "valid_patent_num",
+          },
+          { type: "the_th", colspan: 2, label: "其中发明专利数量(个)" },
+          {
+            type: "the_td",
+            colspan: 3,
+            value: "",
+            value_type: "inputNumber",
+            key: "valid_patent_invent_num",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            colspan: 1,
+            rowspan: 3,
+            label: "企业牵头制定标准数量",
+          },
+          { type: "the_th", colspan: 1, label: "国际标准(个)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "国际标准(个)",
+            key: "international_standard_num",
+          },
+          {
+            type: "the_th",
+            colspan: 1,
+            rowspan: 3,
+            label: "企业参与制定标准数量",
+          },
+          { type: "the_th", colspan: 1, label: "国际标准(个)" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "国际标准(个)",
+            key: "international_enterprise_participation_num",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "国家标准(个)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "国家标准(个)",
+            key: "country_standard_num",
+          },
+          { type: "the_th", colspan: 1, label: "国家标准(个)" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "国家标准(个)",
+            key: "country_enterprise_participation_num",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "行业标准(个)" },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "行业标准(个)",
+            key: "industry_standard_num",
+          },
+          { type: "the_th", colspan: 1, label: "行业标准(个)" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "行业标准(个)",
+            key: "industry_enterprise_participation_num",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            colspan: 1,
+            rowspan: 4,
+            label: "企业经济指标",
+          },
+          { type: "the_th", colspan: 1, label: "年份" },
+          { type: "the_th", colspan: 1, label: "销售额(万元)" },
+          { type: "the_th", colspan: 1, label: "利润(万元)" },
+          { type: "the_th", colspan: 1, label: "税收(万元)" },
+          {
+            type: "the_th",
+            colspan: 2,
+            label: "R&D经费支出占主营业务收入比重(%)",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "2018年" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入销售额",
+            key: "economic_indicators_2018",
+          },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入利润",
+            key: "profit_2018",
+          },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入税收",
+            key: "tax_2018",
+          },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入R&D经费支出占主营业务收入比重",
+            key: "rd_funds_proportion_2018",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "2019年" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入销售额",
+            key: "economic_indicators_2019",
+          },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入利润",
+            key: "profit_2019",
+          },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入税收",
+            key: "tax_2019",
+          },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入R&D经费支出占主营业务收入比重",
+            key: "rd_funds_proportion_2019",
+          },
+        ],
+        [
+          { type: "the_th", colspan: 1, label: "2020年" },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入销售额",
+            key: "economic_indicators_2020",
+          },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入利润",
+            key: "profit_2020",
+          },
+          {
+            type: "the_td",
+            colspan: 1,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入税收",
+            key: "tax_2020",
+          },
+          {
+            type: "the_td",
+            colspan: 2,
+            value: "",
+            value_type: "inputNumber",
+            placeholder: "请输入R&D经费支出占主营业务收入比重",
+            key: "rd_funds_proportion_2020",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            colspan: 7,
+            label:
+              "四、相关材料（附件格式支持word、pdf、jpg、png,数量不超过3个附件）",
+          },
+        ],
+        [
+          { type: "the_th", label: "企业情况简介" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "company_base_info_oss",
+          },
+        ],
+        [
+          { type: "the_th", label: "企业税务登记证副本复印件" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "tax_registration_oss",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            label: "上年度该产品销售证明材料及企业完税证明、会计报表和审计报告",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "sale_certificate",
+          },
+        ],
+        [
+          { type: "the_th", label: "该产品检索查新报告、鉴定验收证书" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "check_accept_oss",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            label:
+              "企业有效专利目录，与该产品相关的有效专利等知识产权目录和证明材料",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "intellectual_property_oss",
+          },
+        ],
+        [
+          {
+            type: "the_th",
+            label:
+              "企业质量认证、资质、荣誉、成果及参与的工程、项目等相关证据材料及目录",
+          },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "quality_certification_oss",
+          },
+        ],
+        [
+          { type: "the_th", label: "企业认为须提供的其他证明材料" },
+          {
+            type: "the_td",
+            colspan: 6,
+            value: [],
+            value_type: "material",
+            isUpload: true,
+            multiple: true,
+            key: "other_oss",
+          },
+        ],
+      ],
+    };
+  },
+  mounted() {
+    console.log(process.env);
+  },
+};
 </script>
+<style lang="less" scoped>
+.home{
+  
+}
+</style>
