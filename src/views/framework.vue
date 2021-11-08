@@ -21,6 +21,7 @@
             v-for="(val, key) in item.children"
             :key="key"
           >
+          
             <el-menu-item
               :index="`${index}-${key}`"
               @click="funGo(val.path, `${index}-${key}`)"
