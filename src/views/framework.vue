@@ -1,78 +1,90 @@
-
 <template>
   <el-container class="framework">
-    <el-aside  style="background-color: rgb(238, 241, 246);width:auto">
-      <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-        <el-radio-button  :label="false">展开</el-radio-button>
-        <el-radio-button  :label="true">收起</el-radio-button>
-      </el-radio-group>
-      <el-menu :default-openeds="['0']" :default-active="defaultActive" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <el-aside style="background-color: rgb(238, 241, 246);width:auto">
+      <el-menu
+     
+        :default-active="$route.path"
+        :unique-opened="true"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        :collapse="isCollapse"
+        :router="true"
+        background-color="#001529"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+      >
         <el-submenu
           :index="`${index}`"
           v-if="!item.path"
           v-for="(item, index) in menuList"
-          :key="index"
+          :key="`${item.title}-${index}`"
         >
           <template slot="title"
             ><i :class="item.icon"></i><span>{{ item.title }}</span></template
           >
-          <el-menu-item-group
-            v-if="!val.children"
-            v-for="(val, key) in item.children"
-            :key="key"
-          >
-          
+      
             <el-menu-item
+             v-if="!val.children"
+            v-for="(val, key) in item.children"
+            :key="`${val.title}-${key}`"
               :index="`${index}-${key}`"
               @click="funGo(val.path, `${index}-${key}`)"
               >{{ val.title }}</el-menu-item
             >
-          </el-menu-item-group>
 
           <el-submenu
             :index="`${index}-${key}`"
             v-if="val.children"
             v-for="(val, key) in item.children"
-            :key="key"
+            :key="`${val.title}-${key}`"
           >
             <template slot="title">{{ val.title }}</template>
             <el-menu-item
               :index="`${index}-${key}-${num}`"
               v-for="(child, num) in val.children"
-              :key="num"
+              :key="`${child.title}-${num}`"
               @click="funGo(child.path, `${index}-${key}-${num}`)"
               >{{ child.title }}</el-menu-item
             >
           </el-submenu>
         </el-submenu>
-        <el-menu-item-group
+
+        <el-menu-item
           v-if="item.path"
           v-for="(item, index) in menuList"
-          :key="index"
+          :key="`${item.title}-${index}`"
+          :index="`${index}`"
+          @click="funGo(item.path, `${index}`)"
         >
-          <el-menu-item
-            :index="`${index}`"
-            @click="funGo(item.path, `${index}`)"
-            >
-              <template slot="title">
-                <i :class="item.icon"></i><span>{{ item.title }}</span>
-              </template>
-            </el-menu-item>
-        </el-menu-item-group>
+            <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>王小虎</span>
+        <div style="display: flex; justify-content: space-between">
+          <i
+            :class="[
+              { 'el-icon-s-fold': !isCollapse },
+              'el-icon-s-unfold',
+              'icon-switch',
+            ]"
+            @click="funSwitch()"
+          ></i>
+          <div>
+            <el-dropdown>
+              <i class="el-icon-setting" style="margin-right: 15px"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>查看</el-dropdown-item>
+                <el-dropdown-item>新增</el-dropdown-item>
+                <el-dropdown-item>删除</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <span>王小虎</span>
+          </div>
+        </div>
       </el-header>
       <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
         <el-breadcrumb-item v-for="item in breadcrumb">{{
@@ -118,19 +130,27 @@ export default {
           icon: "el-icon-menu",
           path: "/page2",
         },
+         {
+          title: "导航三",
+          icon: "el-icon-menu",
+          path: "/page2",
+        },
       ],
       breadcrumb: [],
       defaultActive: "0-0",
-      isCollapse: true
+      isCollapse: false,
     };
   },
   methods: {
-     handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
+    funSwitch() {
+      this.isCollapse = !this.isCollapse;
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
     funGo(url, navList) {
       if (url && !window.location.hash.includes(url)) {
         this.$router.push(url);
@@ -171,6 +191,11 @@ export default {
 .breadcrumb {
   padding: 10px;
 }
+.icon-switch {
+  cursor: pointer;
+  font-size: 28px;
+  margin-top: 15px;
+}
 </style>
 <style>
 .el-header {
@@ -189,8 +214,14 @@ export default {
 }
 </style>
 <style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+.el-menu--collapse {
+  height: 100% !important;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  height: 100% !important;
+}
 </style>

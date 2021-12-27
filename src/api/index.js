@@ -1,3 +1,3 @@
-import fetch from 'utils/fetch'
+import fetch from '@/utils/fetch'
 
-export const personalApproval = data => fetch('get', '/contract/personal_approval', data);
+export const personalApproval = data => fetch('get', '/jlxt-base/getStaffCode?code=', data);

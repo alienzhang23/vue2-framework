@@ -13,7 +13,7 @@
 
 <script>
 import FormTable from "@/components/form-table";
-
+import {personalApproval} from '@/api/index'
 export default {
   name: "Home",
   components: {
@@ -1032,6 +1032,11 @@ export default {
     };
   },
   mounted() {
+    personalApproval().then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
     console.log(process.env);
   },
 };
