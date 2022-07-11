@@ -1,24 +1,13 @@
 <template>
   <div class="home">
-    <form-table :data="data">
-      <colgroup>
-        <col span="1" style="width: 200px" />
-        <col span="1" style="width: 400px" />
-        <col span="3" style="max-width: 251px" />
-        <col span="3" style="max-width: 223px" />
-      </colgroup>
-    </form-table>
+    home
   </div>
 </template>
 
 <script>
-import FormTable from "@/components/form-table";
-import {personalApproval} from '@/api/index'
+// import {personalApproval} from '@/api/index'
 export default {
   name: "Home",
-  components: {
-    FormTable,
-  },
   data() {
     return {
       data: [
@@ -1032,11 +1021,11 @@ export default {
     };
   },
   mounted() {
-    personalApproval().then(res=>{
-      console.log(res)
-    }).catch(err=>{
-      console.log(err)
-    })
+    // personalApproval().then(res=>{
+    //   console.log(res)
+    // }).catch(err=>{
+    //   console.log(err)
+    // })
     console.log(process.env);
   },
 };

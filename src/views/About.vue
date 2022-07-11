@@ -8,22 +8,13 @@
       placeholder="请输入内容"
     ></el-input>
     <el-button id="dom2" type="primary">主要按钮</el-button>
-    <tips-dialog :idStr="domId" ref="tipsDialog" pos="left">
-      <template v-slot:content>
-        <div class="user-explan">
-          <!-- 你自己的用户指引内容 -->
-          <el-button type="primary" @click="funNext()">下一步</el-button>
-        </div>
-      </template>
-    </tips-dialog>
+   
   </div>
 </template>
 <script>
-import tipsDialog from "@/components/tipsDialog.vue";
+// import tipsDialog from "@/components/tipsDialog.vue";
 export default {
-  components: {
-    tipsDialog,
-  },
+  name: "About",
   data() {
     return {
       input: "",
@@ -31,19 +22,10 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      // 打开用户指引
-      this.domId = "dom1";
-      this.$refs.tipsDialog.open();
-    });
+
   },
   methods: {
-    funNext() {
-      this.$refs.tipsDialog.close();
-      // 打开用户指引
-      this.domId = "dom2";
-      this.$refs.tipsDialog.open();
-    },
+    
   },
 };
 </script>

@@ -1,12 +1,12 @@
 <template>
     <div>
-        <input type="text" name="" id="">
+        <input type="text">
     </div>
 </template>
 <script>
  
  export default {
-     name:'Page1',
+     name:'Page3',
      data() {
          return{
 
@@ -14,4 +14,3 @@
      },
  }
  </script>
- 

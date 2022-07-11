@@ -1,8 +1,7 @@
 <template>
   <el-container class="framework">
-    <el-aside style="background-color: rgb(238, 241, 246);width:auto">
+    <el-aside style="background-color: rgb(238, 241, 246); width: auto">
       <el-menu
-     
         :default-active="$route.path"
         :unique-opened="true"
         class="el-menu-vertical-demo"
@@ -23,15 +22,15 @@
           <template slot="title"
             ><i :class="item.icon"></i><span>{{ item.title }}</span></template
           >
-      
-            <el-menu-item
-             v-if="!val.children"
+
+          <el-menu-item
+            v-if="!val.children"
             v-for="(val, key) in item.children"
             :key="`${val.title}-${key}`"
-              :index="`${index}-${key}`"
-              @click="funGo(val.path, `${index}-${key}`)"
-              >{{ val.title }}</el-menu-item
-            >
+            :index="`${index}-${key}`"
+            @click="funGo(val.path, `${index}-${key}`)"
+            >{{ val.title }}</el-menu-item
+          >
 
           <el-submenu
             :index="`${index}-${key}`"
@@ -57,7 +56,7 @@
           :index="`${index}`"
           @click="funGo(item.path, `${index}`)"
         >
-            <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
+          <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
@@ -87,7 +86,7 @@
         </div>
       </el-header>
       <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
-        <el-breadcrumb-item v-for="item in breadcrumb">{{
+        <el-breadcrumb-item v-for="item,index in breadcrumb" :key="index">{{
           item
         }}</el-breadcrumb-item>
       </el-breadcrumb>
@@ -130,7 +129,7 @@ export default {
           icon: "el-icon-menu",
           path: "/page2",
         },
-         {
+        {
           title: "导航三",
           icon: "el-icon-menu",
           path: "/page2",
@@ -200,9 +199,9 @@ export default {
 <style>
 .el-header {
   background-color: #ffffff;
-    color: #333;
-    line-height: 60px;
-    border-bottom: 1px solid #e8e8e8;
+  color: #333;
+  line-height: 60px;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .el-aside {
@@ -224,4 +223,3 @@ export default {
   height: 100% !important;
 }
 </style>
-
