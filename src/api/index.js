@@ -1,3 +1,3 @@
 import fetch from '@/utils/fetch'
 
-export const personalApproval = data => fetch('get', '/jlxt-base/getStaffCode?code=', data);
+export const personalApproval = data => fetch('get', '/getStaffCode?code=', data);

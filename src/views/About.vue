@@ -2,7 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <el-input
-      id="dom1"
+      class="dom1"
       v-model="input"
       style="width:200px;margin-right:20px"
       placeholder="请输入内容"
@@ -37,5 +37,8 @@ export default {
   width: 500px;
   height: 300px;
   background: #fff;
+}
+ .dom1 ::v-deep p .el-input__inner{
+  border-color:black;
 }
 </style>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {Message} from 'element-ui';
+import router from '../router'
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api的base_url
@@ -33,15 +34,11 @@ service.interceptors.response.use(
     var xhr = response, code = xhr.data.code;
     if (code == 200) {
       return Promise.resolve(xhr);
-    }else if(response.status==204){//删除方法
-      return Promise.resolve({
-        data:{
-          code:200
-        }
-      });
+    }else if(response.status==403){//删除方法
+      Message.error('请重新登录')
+      router.push('/login')
     } else {
       Message.error(xhr.data.msg)
-      return Promise.reject(xhr);
     }
   },
   error => {
